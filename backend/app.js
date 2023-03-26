@@ -21,8 +21,10 @@ app.use(fileUpload());
 // Route imports
 
 const user = require("./routes/userRoute");
+// const payment = require("./routes/paymentRoute");
 
 app.use("/api/v1", user);
+// app.use("/api/v1", payment);
 
 // middleware for errors
 app.use(errorMiddleware);

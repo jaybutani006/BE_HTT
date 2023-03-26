@@ -56,3 +56,35 @@ exports.logout = catchAsyncError(async(req, res, next) => {
         message: "Logged Out"
     })
 })
+
+// get users of any one FRENCHISE
+exports.getUsers = catchAsyncError(async(req, res, next) => {
+    const { fren } = req.params;
+    const users = await User.find({ fren: fren });
+
+    res.send(users);
+});
+exports.getAllUsers = catchAsyncError(async(req, res, next) => {
+    const users = await User.find();
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    // res.setHeader(
+    //     "Access-Control-Allow-Headers",
+    //     "Content-Type, Authorization"
+    // );
+
+    // const userMap = {};
+    // users.forEach((user) => {
+    //     userMap[user._id] = user;
+    // });
+
+    res.send(users);
+});
+
+// get user detail
+exports.getUserDetail = catchAsyncError(async(req, res, next) => {
+    const { email } = req.params;
+    const user = await User.find({ email: email });
+
+    res.send(user);
+});
